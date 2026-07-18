@@ -3504,32 +3504,40 @@
   <div class="modal-box" role="dialog" aria-modal="true" aria-label="إنشاء حساب">
     <div class="wix-modal-body">
 
-      <!-- Email field -->
-      <input
-        type="email"
-        id="modal-email-input"
-        class="wix-email-input"
-        placeholder="البريد الإلكتروني"
-        autocomplete="email"
-      />
+      <!-- ===== FORM حقيقي: هذا ما يخلي المتصفح (Chrome/Safari/Samsung Internet)
+           يعرض على المستخدم "هل تريد حفظ كلمة المرور؟" ثم يملأ الحقول تلقائيًا
+           في المرة القادمة — بدون هذا الـ form الحقيقي، المتصفح لا يعرض عرض الحفظ ===== -->
+      <form id="loginForm" autocomplete="on" onsubmit="doLogin(event); return false;">
 
-      <!-- Password field — تظهر فقط بعد إدخال البريد -->
-      <input
-        type="password"
-        id="modal-password-input"
-        class="wix-email-input"
-        placeholder="كلمة المرور"
-        autocomplete="current-password"
-        style="display:none;margin-top:10px;"
-      />
+        <!-- Email field -->
+        <input
+          type="email"
+          id="modal-email-input"
+          name="email"
+          class="wix-email-input"
+          placeholder="البريد الإلكتروني"
+          autocomplete="username"
+        />
 
-      <!-- رسالة الخطأ -->
-      <div id="modal-auth-error" style="display:none;color:#e53e3e;font-size:.85rem;margin-top:8px;text-align:center;"></div>
+        <!-- Password field — تظهر فقط بعد إدخال البريد -->
+        <input
+          type="password"
+          id="modal-password-input"
+          name="password"
+          class="wix-email-input"
+          placeholder="كلمة المرور"
+          autocomplete="current-password"
+          style="display:none;margin-top:10px;"
+        />
 
-      <!-- Continue Button -->
-      <button class="wix-continue-btn" id="modal-continue-btn" onclick="doLogin()">
-        المتابعة باستخدام البريد الإلكتروني
-      </button>
+        <!-- رسالة الخطأ -->
+        <div id="modal-auth-error" style="display:none;color:#e53e3e;font-size:.85rem;margin-top:8px;text-align:center;"></div>
+
+        <!-- Continue Button — type="submit" ضروري حتى يفهم المتصفح أن هذا فورم دخول -->
+        <button type="submit" class="wix-continue-btn" id="modal-continue-btn">
+          المتابعة باستخدام البريد الإلكتروني
+        </button>
+      </form>
 
       <!-- Divider -->
       <div class="wix-divider"><span>أو</span></div>
@@ -5225,6 +5233,11 @@ function openRegisterModal() {
   const modalEmail = document.getElementById('modal-email-input');
   if (heroEmail && modalEmail && heroEmail.value.trim()) {
     modalEmail.value = heroEmail.value.trim();
+  } else if (modalEmail) {
+    // ما فيش إيميل مكتوب في الـ Hero → نجيب آخر إيميل نجح فيه المستخدم بالدخول من قبل
+    // (كلمة السر يملأها المتصفح تلقائيًا بنفسه لأن الفورم أصبح فورم حقيقي معترف به)
+    const lastEmail = localStorage.getItem('sn_last_email');
+    if (lastEmail) modalEmail.value = lastEmail;
   }
   // إعادة ضبط النافذة: إخفاء كلمة المرور والرجوع لخطوة البريد
   resetModalToEmailStep();
@@ -5263,7 +5276,8 @@ function closeModalOutside(e) {
 
 // خطوة 1: التحقق من البريد ثم إظهار خانة كلمة المرور
 // خطوة 2: تسجيل الدخول (أو إنشاء حساب جديد تلقائيًا إن لم يكن موجودًا)
-function doLogin() {
+function doLogin(event) {
+  if (event) event.preventDefault(); // نمنع إعادة تحميل الصفحة، لكن نُبقي الفورم حقيقيًا حتى يقترح المتصفح حفظ كلمة المرور
   const emailInput = document.getElementById('modal-email-input');
   const passInput = document.getElementById('modal-password-input');
   const continueBtn = document.getElementById('modal-continue-btn');
@@ -5313,6 +5327,7 @@ function doLogin() {
       if (settled) return;
       settled = true;
       clearTimeout(safetyTimeout);
+      localStorage.setItem('sn_last_email', email); // نتذكر آخر إيميل نجح فيه الدخول
       closeModal();
       goToPlatform();
     })
@@ -5323,7 +5338,7 @@ function doLogin() {
       // إن لم يكن الحساب موجودًا، ننشئ حسابًا جديدًا تلقائيًا بنفس البيانات
       if (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
         auth.createUserWithEmailAndPassword(email, password)
-          .then(() => { closeModal(); goToPlatform(); })
+          .then(() => { localStorage.setItem('sn_last_email', email); closeModal(); goToPlatform(); })
           .catch(err2 => {
             showModalError(friendlyAuthError(err2));
             continueBtn.disabled = false;
