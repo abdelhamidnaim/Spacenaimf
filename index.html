@@ -3029,6 +3029,7 @@
   position:absolute; inset:0;
   width:100%; height:100%;
   object-fit:cover;
+  object-position:center;
   transition:transform .45s cubic-bezier(.4,0,.2,1);
 }
 .store-card-pro:hover .store-cover-img { transform:scale(1.05); }
@@ -4183,14 +4184,16 @@ const STORES = [
   },
   {
     id: 41, cat: 'beauty',
-    img: 'https://picsum.photos/seed/beauty-1/800/600',
-    name: 'متجر لمسة جمال',
+    img: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80',
+    name: 'جمالك',
     badge: 'تجميل', badgeColor: '#db2777', badgeText: '#fff',
     feats: ["واتساب", "توصيل مجاني", "متجاوب"],
     bg: 'linear-gradient(135deg,#db2777,#f9a8d4)',
     icon: '💄',
     previewUrl: '',
-    waMsg: 'مرحباً، أريد طلب متجر لمسة جمال',
+    waMsg: 'مرحباً، أريد طلب من متجر جمالك',
+    customHtml: true,
+    customHtmlFn: 'getJamalikBeautyHtml',
   },
   {
     id: 42, cat: 'beauty',
@@ -4757,14 +4760,16 @@ const STORES = [
   },
   {
     id: 93, cat: 'pets',
-    img: 'https://picsum.photos/seed/pets-1/800/600',
-    name: 'متجر مستلزمات الحيوانات',
-    badge: 'حيوانات أليفة', badgeColor: '#059669', badgeText: '#fff',
+    img: 'https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&q=80',
+    name: 'عالم الفراء',
+    badge: 'حيوانات أليفة', badgeColor: '#FF9466', badgeText: '#fff',
     feats: ["واتساب", "توصيل مجاني", "متجاوب"],
-    bg: 'linear-gradient(135deg,#059669,#a7f3d0)',
+    bg: 'linear-gradient(135deg,#FF9466,#9C7BD9)',
     icon: '🐾',
     previewUrl: '',
-    waMsg: 'مرحباً، أريد طلب متجر مستلزمات الحيوانات',
+    waMsg: 'مرحباً، أريد طلب من متجر عالم الفراء',
+    customHtml: true,
+    customHtmlFn: 'getPetWorldHtml',
   },
   {
     id: 94, cat: 'pets',
@@ -12642,6 +12647,1704 @@ function closeQuickView(){
   document.body.style.overflow = '';
 }
 <\/script>
+</body>
+</html>`;
+}
+
+// ===== PET WORLD STORE HTML (عالم الفراء) =====
+function getPetWorldHtml() {
+  return `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عالم الفراء 🐾 متجر الحيوانات الأليفة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8ED;
+    --ink:#3D2B1F;
+    --ink-soft:#7A6353;
+    --dogs-accent:#FF9466;
+    --dogs-bg:#FFEDE0;
+    --cats-accent:#9C7BD9;
+    --cats-bg:#F1EBFC;
+    --birds-accent:#3CADA4;
+    --birds-bg:#E1F5F3;
+    --card-shadow: 0 10px 24px rgba(61,43,31,0.10);
+    --radius-lg: 32px;
+    --radius-md: 22px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Cairo', sans-serif;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Baloo Bhaijaan 2', sans-serif;
+    margin:0;
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;margin:0;padding:0;}
+  button{font-family:inherit;cursor:pointer;border:none;}
+  img,svg{display:block;}
+
+  /* ===== paw print background pattern ===== */
+  .paw-field{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+  }
+  .paw{
+    position:absolute;
+    opacity:.16;
+  }
+
+  /* ===== NAV ===== */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(255,248,237,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:2px dashed rgba(61,43,31,0.12);
+  }
+  .nav-wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:16px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:1.5rem;
+    font-weight:800;
+    color:var(--ink);
+  }
+  .logo svg{width:38px;height:38px;}
+  nav ul{
+    display:flex;
+    gap:6px;
+  }
+  nav a{
+    padding:10px 18px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:0.98rem;
+    color:var(--ink-soft);
+    transition:.25s;
+  }
+  nav a:hover{background:var(--dogs-bg);color:var(--ink);}
+  .nav-cta{
+    background:var(--ink);
+    color:var(--cream);
+    padding:11px 22px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:.95rem;
+    transition:.25s;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{transform:translateY(-2px);background:#2A1D14;}
+
+  .menu-toggle{
+    display:none;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:#fff;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .menu-toggle span{
+    display:block;
+    width:20px;
+    height:2px;
+    background:var(--ink);
+    position:relative;
+  }
+  .menu-toggle span::before,.menu-toggle span::after{
+    content:'';
+    position:absolute;
+    right:0;
+    width:20px;
+    height:2px;
+    background:var(--ink);
+    transition:.25s;
+  }
+  .menu-toggle span::before{top:-6px;}
+  .menu-toggle span::after{top:6px;}
+
+  .mobile-nav{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+    background:var(--cream);
+    border-top:2px dashed rgba(61,43,31,0.12);
+  }
+  .mobile-nav.open{max-height:260px;}
+  .mobile-nav ul{
+    display:flex;
+    flex-direction:column;
+    padding:10px 28px 18px;
+    gap:4px;
+  }
+  .mobile-nav a{
+    display:block;
+    padding:12px 8px;
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--ink);
+    border-bottom:1px solid rgba(61,43,31,0.08);
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    max-width:1180px;
+    margin:0 auto;
+    padding:70px 28px 90px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    align-items:center;
+    gap:40px;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--dogs-bg);
+    color:#B85C2E;
+    font-weight:700;
+    font-size:.85rem;
+    padding:8px 16px;
+    border-radius:999px;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:3.4rem;
+    line-height:1.15;
+    font-weight:800;
+    color:var(--ink);
+  }
+  .hero h1 span{color:var(--dogs-accent);}
+  .hero p{
+    margin-top:18px;
+    font-size:1.15rem;
+    color:var(--ink-soft);
+    max-width:480px;
+    line-height:1.8;
+  }
+  .hero-actions{
+    margin-top:32px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--dogs-accent);
+    color:#fff;
+    padding:15px 28px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:1rem;
+    box-shadow:0 10px 20px rgba(255,148,102,0.35);
+    transition:.25s;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    line-height:1.3;
+  }
+  .btn-primary:hover{transform:translateY(-3px) rotate(-1deg);}
+  .btn-ghost{
+    padding:15px 26px;
+    border-radius:999px;
+    font-weight:700;
+    border:2px solid rgba(61,43,31,0.15);
+    transition:.25s;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    line-height:1.3;
+  }
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  .hero-art{
+    position:relative;
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .hero-blob{
+    position:absolute;
+    inset:6%;
+    background:linear-gradient(135deg,var(--dogs-bg),var(--cats-bg) 60%, var(--birds-bg));
+    border-radius:62% 38% 55% 45% / 45% 55% 45% 55%;
+    animation:blobMorph 9s ease-in-out infinite;
+  }
+  @keyframes blobMorph{
+    0%,100%{border-radius:62% 38% 55% 45% / 45% 55% 45% 55%;}
+    50%{border-radius:42% 58% 40% 60% / 58% 40% 60% 42%;}
+  }
+  .hero-paw-big{
+    position:relative;
+    width:56%;
+    animation:heroBounce 3.4s ease-in-out infinite;
+    filter:drop-shadow(0 18px 20px rgba(61,43,31,0.18));
+  }
+  @keyframes heroBounce{
+    0%,100%{transform:translateY(0) rotate(-6deg);}
+    50%{transform:translateY(-14px) rotate(4deg);}
+  }
+
+  /* trail of small paws leading into the first section - signature element */
+  .paw-trail{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 28px;
+    height:70px;
+    position:relative;
+  }
+  .paw-trail svg{position:absolute;opacity:0;transform:translateY(14px) scale(.6);}
+  .paw-trail svg.show{
+    animation:pawStep .5s ease forwards;
+  }
+  @keyframes pawStep{
+    to{opacity:.55;transform:translateY(0) scale(1);}
+  }
+
+  /* ===== SECTION SHELL ===== */
+  .section{
+    position:relative;
+    padding:90px 28px;
+    overflow:hidden;
+  }
+  .section-inner{
+    max-width:1180px;
+    margin:0 auto;
+    position:relative;
+    z-index:2;
+  }
+  .section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    margin-bottom:44px;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .section-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-weight:700;
+    font-size:.9rem;
+    padding:8px 16px;
+    border-radius:999px;
+    margin-bottom:14px;
+  }
+  .section-head h2{
+    font-size:2.4rem;
+    font-weight:800;
+  }
+  .section-head p{
+    color:var(--ink-soft);
+    max-width:360px;
+    font-size:1.02rem;
+    line-height:1.75;
+  }
+
+  .dogs{background:var(--dogs-bg);}
+  .cats{background:var(--cats-bg);}
+  .birds{background:var(--birds-bg);}
+
+  .dogs .section-tag{background:#fff;color:var(--dogs-accent);}
+  .cats .section-tag{background:#fff;color:var(--cats-accent);}
+  .birds .section-tag{background:#fff;color:var(--birds-accent);}
+
+  /* card grid */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+  }
+  .card{
+    background:#fff;
+    border-radius:var(--radius-lg);
+    padding:22px;
+    box-shadow:var(--card-shadow);
+    transition:transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s;
+    position:relative;
+  }
+  .card:hover{
+    transform:translateY(-8px) rotate(-1.3deg);
+    box-shadow:0 18px 30px rgba(61,43,31,0.16);
+  }
+  .card:nth-child(even):hover{transform:translateY(-8px) rotate(1.3deg);}
+
+  .card-media{
+    border-radius:var(--radius-md);
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:16px;
+    position:relative;
+    overflow:hidden;
+  }
+  .dogs .card-media{background:var(--dogs-bg);}
+  .cats .card-media{background:var(--cats-bg);}
+  .birds .card-media{background:var(--birds-bg);}
+  .card-media svg{width:52%;height:52%;transition:transform .35s;}
+  .card:hover .card-media svg{transform:scale(1.12) rotate(-4deg);}
+
+  .badge{
+    position:absolute;
+    top:12px;
+    inset-inline-start:12px;
+    background:#fff;
+    font-size:.72rem;
+    font-weight:700;
+    padding:5px 11px;
+    border-radius:999px;
+    color:var(--ink-soft);
+  }
+
+  .card h3{
+    font-size:1.12rem;
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .card .desc{
+    font-size:.86rem;
+    color:var(--ink-soft);
+    line-height:1.6;
+    margin-bottom:14px;
+    min-height:42px;
+  }
+  .card-foot{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .price{
+    font-weight:800;
+    font-size:1.1rem;
+  }
+  .add-btn{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:1.3rem;
+    transition:.25s;
+  }
+  .dogs .price, .dogs .add-btn{color:var(--dogs-accent);}
+  .dogs .add-btn{background:var(--dogs-accent);color:#fff;}
+  .cats .price, .cats .add-btn{color:var(--cats-accent);}
+  .cats .add-btn{background:var(--cats-accent);color:#fff;}
+  .birds .price, .birds .add-btn{color:var(--birds-accent);}
+  .birds .add-btn{background:var(--birds-accent);color:#fff;}
+  .add-btn:hover{transform:scale(1.15) rotate(90deg);}
+
+  /* decorative paw scatter per section */
+  .section .paw-field .paw{
+    width:64px;height:64px;
+  }
+  .dogs .paw-field .paw svg path{fill:var(--dogs-accent);}
+  .cats .paw-field .paw svg path{fill:var(--cats-accent);}
+  .birds .paw-field .paw svg path{fill:var(--birds-accent);}
+
+  /* ===== FOOTER ===== */
+  footer{
+    background:var(--ink);
+    color:var(--cream);
+    padding:60px 28px 30px;
+    position:relative;
+    overflow:hidden;
+  }
+  .footer-inner{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1.3fr 1fr 1fr;
+    gap:40px;
+  }
+  footer h3{font-size:1.4rem;font-weight:800;margin-bottom:14px;}
+  footer p{color:#D8C9BA;line-height:1.8;font-size:.95rem;}
+  footer h4{font-weight:700;margin-bottom:14px;font-size:1rem;}
+  footer ul li{margin-bottom:10px;}
+  footer ul a{color:#D8C9BA;font-size:.92rem;transition:.2s;}
+  footer ul a:hover{color:var(--dogs-accent);}
+  .footer-bottom{
+    max-width:1180px;
+    margin:40px auto 0;
+    padding-top:22px;
+    border-top:1px solid rgba(255,255,255,0.12);
+    font-size:.85rem;
+    color:#B8A798;
+    text-align:center;
+  }
+
+  /* reveal on scroll */
+  .reveal{
+    opacity:0;
+    transform:translateY(26px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr;padding-top:40px;}
+    .hero h1{font-size:2.4rem;}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .footer-inner{grid-template-columns:1fr;}
+    header nav{display:none;}
+    .nav-cta{display:none;}
+    .menu-toggle{display:flex;}
+  }
+  @media (max-width:520px){
+    .grid{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header>
+  <div class="nav-wrap">
+    <div class="logo">
+      <svg viewBox="0 0 64 64"><path fill="var(--dogs-accent)" d="M32 30c9 0 16 8 16 17 0 6-4 9-9 9-4 0-5-3-7-3s-3 3-7 3c-5 0-9-3-9-9 0-9 7-17 16-17z"/><circle cx="16" cy="20" r="7" fill="var(--cats-accent)"/><circle cx="48" cy="20" r="7" fill="var(--birds-accent)"/><circle cx="26" cy="10" r="5.5" fill="var(--dogs-accent)"/><circle cx="38" cy="10" r="5.5" fill="var(--dogs-accent)"/></svg>
+      عالم الفراء
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#dogs">الكلاب</a></li>
+        <li><a href="#cats">القطط</a></li>
+        <li><a href="#birds">الطيور</a></li>
+        <li><a href="#about">من نحن</a></li>
+      </ul>
+    </nav>
+    <a href="#dogs" class="nav-cta">تسوّق الآن 🛍️</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة"><span></span></button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="#dogs">الكلاب</a></li>
+      <li><a href="#cats">القطط</a></li>
+      <li><a href="#birds">الطيور</a></li>
+      <li><a href="#about">من نحن</a></li>
+      <li><a href="#dogs">تسوّق الآن 🛍️</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="paw-field" id="heroPaws"></div>
+  <div style="position:relative;z-index:2;">
+    <span class="eyebrow">🐾 كل ما يحتاجه صديقك المفضّل</span>
+    <h1>منزل دافئ لكل <span>حيوان أليف</span> تحبّه</h1>
+    <p>ألعاب، أسرّة، وأطعمة مختارة بعناية لصحة وسعادة كلبك وقطتك وطائرك. توصيل سريع، وابتسامة مضمونة على وجه صديقك.</p>
+    <div class="hero-actions">
+      <a href="#dogs" class="btn-primary">اكتشف المنتجات</a>
+      <a href="#about" class="btn-ghost">تعرّف علينا</a>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="hero-blob"></div>
+    <svg class="hero-paw-big" viewBox="0 0 200 200">
+      <path fill="#fff" d="M100 92c30 0 52 26 52 54 0 19-13 28-29 28-13 0-16-9-23-9s-10 9-23 9c-16 0-29-9-29-28 0-28 22-54 52-54z"/>
+      <ellipse cx="52" cy="62" rx="20" ry="24" fill="#fff"/>
+      <ellipse cx="148" cy="62" rx="20" ry="24" fill="#fff"/>
+      <ellipse cx="80" cy="30" rx="16" ry="20" fill="#fff"/>
+      <ellipse cx="120" cy="30" rx="16" ry="20" fill="#fff"/>
+    </svg>
+  </div>
+</section>
+
+<div class="paw-trail" id="pawTrail"></div>
+
+<!-- ============ DOGS ============ -->
+<section class="section dogs" id="dogs">
+  <div class="paw-field" id="dogsPaws"></div>
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div>
+        <span class="section-tag">🐶 قسم الكلاب</span>
+        <h2>كل شيء لصديقك الوفي</h2>
+      </div>
+      <p>أسرّة مريحة، ألعاب متينة، وأطعمة تمنح كلبك الطاقة والفرح طوال اليوم.</p>
+    </div>
+    <div class="grid" id="dogsGrid"></div>
+  </div>
+</section>
+
+<!-- ============ CATS ============ -->
+<section class="section cats" id="cats">
+  <div class="paw-field" id="catsPaws"></div>
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div>
+        <span class="section-tag">🐱 قسم القطط</span>
+        <h2>ملكة أو ملك المنزل يستحق الأفضل</h2>
+      </div>
+      <p>أعواد خدش، أنفاق مرحة، وألعاب تُبقي فضول قطتك مشغولاً طوال النهار.</p>
+    </div>
+    <div class="grid" id="catsGrid"></div>
+  </div>
+</section>
+
+<!-- ============ BIRDS ============ -->
+<section class="section birds" id="birds">
+  <div class="paw-field" id="birdsPaws"></div>
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div>
+        <span class="section-tag">🐦 قسم الطيور</span>
+        <h2>تغريد أسعد مع كل يوم</h2>
+      </div>
+      <p>أقفاص مريحة، مساند ملوّنة، وخلطات بذور غنية لصحة طائرك وحيويته.</p>
+    </div>
+    <div class="grid" id="birdsGrid"></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="about">
+  <div class="footer-inner">
+    <div>
+      <h3>🐾 عالم الفراء</h3>
+      <p>متجر متخصص لكل ما يحتاجه صديقك الأليف — من الطعام إلى الألعاب والإكسسوارات، بجودة نثق بها لحيواناتنا نحن أيضًا.</p>
+    </div>
+    <div>
+      <h4>الأقسام</h4>
+      <ul>
+        <li><a href="#dogs">الكلاب</a></li>
+        <li><a href="#cats">القطط</a></li>
+        <li><a href="#birds">الطيور</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>تواصل معنا</h4>
+      <ul>
+        <li><a href="#">دعم العملاء</a></li>
+        <li><a href="#">مواقع الفروع</a></li>
+        <li><a href="#">الأسئلة الشائعة</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 عالم الفراء — صُنع بحب لكل الأصدقاء ذوي الفراء والريش 🐾</div>
+</footer>
+
+<script>
+/* ---------- SVG icon library (simple, cute, line-based) ---------- */
+const icons = {
+  bone: \`<svg viewBox="0 0 64 64"><path fill="currentColor" d="M8 24c-3 0-5 2-5 5s2 5 5 5c1 0 2 0 3-1l10 10c-1 1-1 2-1 3 0 3 2 5 5 5s5-2 5-5c0-1 0-2-1-3l6-6c1 1 2 1 3 1 3 0 5-2 5-5s-2-5-5-5c-1 0-2 0-3 1l-6-6c1-1 1-2 1-3 0-3-2-5-5-5s-5 2-5 5c0 1 0 2 1 3L11 23c-1-1-2-1-3-1z"/></svg>\`,
+  paw: \`<svg viewBox="0 0 64 64"><path fill="currentColor" d="M32 30c9 0 16 8 16 17 0 6-4 9-9 9-4 0-5-3-7-3s-3 3-7 3c-5 0-9-3-9-9 0-9 7-17 16-17z"/><ellipse cx="16" cy="20" rx="6" ry="8"/><ellipse cx="48" cy="20" rx="6" ry="8"/><ellipse cx="25" cy="9" rx="5" ry="7"/><ellipse cx="39" cy="9" rx="5" ry="7"/></svg>\`,
+  bowl: \`<svg viewBox="0 0 64 64"><path fill="currentColor" d="M6 30h52c0 12-11 22-26 22S6 42 6 30z"/><rect x="14" y="14" width="36" height="8" rx="4" fill="currentColor" opacity=".5"/></svg>\`,
+  leash: \`<svg viewBox="0 0 64 64"><circle cx="16" cy="16" r="8" fill="none" stroke="currentColor" stroke-width="4"/><path d="M22 22 C 40 30, 44 40, 48 54" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>\`,
+  feather: \`<svg viewBox="0 0 64 64"><path fill="currentColor" d="M46 6C30 10 16 24 12 44l6 6C34 44 48 30 52 14L46 6z"/><path d="M18 46 L8 56" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>\`,
+  scratch: \`<svg viewBox="0 0 64 64"><rect x="14" y="8" width="10" height="48" rx="5" fill="currentColor"/><rect x="27" y="16" width="10" height="40" rx="5" fill="currentColor" opacity=".8"/><rect x="40" y="24" width="10" height="32" rx="5" fill="currentColor" opacity=".6"/></svg>\`,
+  tunnel: \`<svg viewBox="0 0 64 64"><path fill="none" stroke="currentColor" stroke-width="6" d="M8 48c0-18 10-32 24-32s24 14 24 32" stroke-linecap="round"/></svg>\`,
+  fish: \`<svg viewBox="0 0 64 64"><path fill="currentColor" d="M6 32c10-12 30-16 42-8-4 3-4 13 0 16-12 8-32 4-42-8z"/><circle cx="20" cy="28" r="2" fill="#fff"/></svg>\`,
+  cage: \`<svg viewBox="0 0 64 64"><path fill="none" stroke="currentColor" stroke-width="3" d="M12 20a20 16 0 0140 0v24a20 8 0 01-40 0z"/><line x1="12" y1="20" x2="12" y2="44" stroke="currentColor" stroke-width="3"/><line x1="52" y1="20" x2="52" y2="44" stroke="currentColor" stroke-width="3"/><line x1="32" y1="4" x2="32" y2="12" stroke="currentColor" stroke-width="3"/></svg>\`,
+  seed: \`<svg viewBox="0 0 64 64"><ellipse cx="32" cy="32" rx="10" ry="16" fill="currentColor" transform="rotate(20 32 32)"/><ellipse cx="18" cy="40" rx="7" ry="11" fill="currentColor" opacity=".7" transform="rotate(-10 18 40)"/><ellipse cx="46" cy="24" rx="7" ry="11" fill="currentColor" opacity=".7" transform="rotate(35 46 24)"/></svg>\`,
+  perch: \`<svg viewBox="0 0 64 64"><circle cx="32" cy="18" r="10" fill="currentColor"/><rect x="29" y="26" width="6" height="30" fill="currentColor"/><rect x="14" y="52" width="36" height="6" rx="3" fill="currentColor"/></svg>\`,
+  mirror: \`<svg viewBox="0 0 64 64"><circle cx="32" cy="26" r="18" fill="none" stroke="currentColor" stroke-width="4"/><rect x="29" y="42" width="6" height="16" fill="currentColor"/></svg>\`
+};
+
+const products = {
+  dogs: [
+    {icon:'bone', name:'لعبة عظمة صريّرة', desc:'مطاط طبيعي متين، مثالية للعض واللعب اليومي', price:'45 ر.س', badge:'الأكثر مبيعًا'},
+    {icon:'paw', name:'سرير كلب دائري ناعم', desc:'حشوة فرو صناعي دافئة لنوم هانئ', price:'189 ر.س', badge:'جديد'},
+    {icon:'bowl', name:'طعام جاف خالٍ من الحبوب', desc:'مكونات طبيعية 100% لطاقة متوازنة', price:'99 ر.س', badge:''},
+    {icon:'leash', name:'طوق ورباط جلد أصلي', desc:'تصميم أنيق مقاوم للماء والاهتراء', price:'129 ر.س', badge:''}
+  ],
+  cats: [
+    {icon:'feather', name:'عصا الريش التفاعلية', desc:'تحفّز غريزة الصيد لدى قطتك المدللة', price:'39 ر.س', badge:'مفضّل'},
+    {icon:'scratch', name:'برج خدش متعدد الطوابق', desc:'خشب طبيعي وحبل جوت متين', price:'249 ر.س', badge:'جديد'},
+    {icon:'tunnel', name:'نفق لعب قابل للطي', desc:'مساحة مرحة للاختباء والمطاردة', price:'79 ر.س', badge:''},
+    {icon:'fish', name:'مكافآت سمك السلمون', desc:'وجبة خفيفة غنية بأوميغا 3', price:'35 ر.س', badge:''}
+  ],
+  birds: [
+    {icon:'cage', name:'قفص طائر واسع ومريح', desc:'تهوية ممتازة وسهولة تنظيف يومية', price:'219 ر.س', badge:'الأكثر مبيعًا'},
+    {icon:'perch', name:'مسند ملوّن دوّار', desc:'يقوّي قبضة الأرجل ويضيف لمسة مرحة', price:'29 ر.س', badge:''},
+    {icon:'seed', name:'خلطة بذور فاخرة', desc:'مزيج غني بالفيتامينات لريش لامع', price:'42 ر.س', badge:'جديد'},
+    {icon:'mirror', name:'مرآة لعب مع جرس', desc:'رفيق ترفيهي يبقي طائرك نشيطًا', price:'19 ر.س', badge:''}
+  ]
+};
+
+function buildGrid(sectionKey, gridId){
+  const grid = document.getElementById(gridId);
+  grid.innerHTML = products[sectionKey].map(p => \`
+    <div class="card reveal">
+      <div class="card-media">
+        \${p.badge ? \`<span class="badge">\${p.badge}</span>\` : ''}
+        \${icons[p.icon]}
+      </div>
+      <h3>\${p.name}</h3>
+      <div class="desc">\${p.desc}</div>
+      <div class="card-foot">
+        <span class="price">\${p.price}</span>
+        <button class="add-btn" aria-label="أضف إلى السلة">+</button>
+      </div>
+    </div>
+  \`).join('');
+}
+buildGrid('dogs','dogsGrid');
+buildGrid('cats','catsGrid');
+buildGrid('birds','birdsGrid');
+
+/* ---------- scattered paw print backgrounds ---------- */
+function scatterPaws(containerId, count){
+  const el = document.getElementById(containerId);
+  if(!el) return;
+  for(let i=0;i<count;i++){
+    const p = document.createElement('div');
+    p.className = 'paw';
+    p.style.top = Math.random()*90+'%';
+    p.style.left = Math.random()*94+'%';
+    p.style.transform = \`rotate(\${Math.random()*360}deg) scale(\${0.5+Math.random()*0.8})\`;
+    p.innerHTML = icons.paw;
+    el.appendChild(p);
+  }
+}
+scatterPaws('heroPaws', 10);
+scatterPaws('dogsPaws', 8);
+scatterPaws('catsPaws', 8);
+scatterPaws('birdsPaws', 8);
+
+/* ---------- paw trail signature (steps walking toward first section) ---------- */
+const trail = document.getElementById('pawTrail');
+const trailCount = 6;
+for(let i=0;i<trailCount;i++){
+  const s = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  s.setAttribute('viewBox','0 0 64 64');
+  s.setAttribute('width','26');
+  s.setAttribute('height','26');
+  s.style.top = (i%2===0 ? '6px' : '30px');
+  s.style.right = (i * (90/trailCount)) + '%';
+  s.style.color = ['#FF9466','#9C7BD9','#3CADA4'][i%3];
+  s.style.animationDelay = (i*0.12)+'s';
+  s.innerHTML = \`<path fill="currentColor" d="M32 30c9 0 16 8 16 17 0 6-4 9-9 9-4 0-5-3-7-3s-3 3-7 3c-5 0-9-3-9-9 0-9 7-17 16-17z"/><ellipse cx="16" cy="20" rx="6" ry="8" fill="currentColor"/><ellipse cx="48" cy="20" rx="6" ry="8" fill="currentColor"/><ellipse cx="25" cy="9" rx="5" ry="7" fill="currentColor"/><ellipse cx="39" cy="9" rx="5" ry="7" fill="currentColor"/>\`;
+  trail.appendChild(s);
+}
+
+/* ---------- mobile nav toggle ---------- */
+const menuToggle = document.getElementById('menuToggle');
+const mobileNav = document.getElementById('mobileNav');
+menuToggle.addEventListener('click', ()=>{
+  mobileNav.classList.toggle('open');
+});
+mobileNav.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click', ()=> mobileNav.classList.remove('open'));
+});
+
+/* ---------- scroll reveal ---------- */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      if(e.target.tagName.toLowerCase()==='svg') e.target.classList.add('show');
+    }
+  });
+},{threshold:0.15});
+
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('.paw-trail svg').forEach(el=>io.observe(el));
+<\/script>
+
+</body>
+</html>`;
+}
+
+// ===== JAMALIK BEAUTY STORE HTML (جمالك) =====
+function getJamalikBeautyHtml() {
+  return `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>جمالك - متجر التجميل الفاخر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
+            min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased;
+        }
+        .icon-svg { width: 24px; height: 24px; fill: currentColor; flex-shrink: 0; }
+        .icon-svg-sm { width: 18px; height: 18px; }
+        .icon-svg-lg { width: 32px; height: 32px; }
+        .icon-svg-xl { width: 48px; height: 48px; }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            box-shadow: 0 4px 30px rgba(236,72,153,0.15); border-bottom: 1px solid rgba(236,72,153,0.1);
+        }
+        .logo { font-size: 22px; font-weight: 900; color: #be185d; display: flex; align-items: center; gap: 8px; }
+        .logo-icon-wrap {
+            width: 36px; height: 36px; background: linear-gradient(135deg,#ec4899,#be185d);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white;
+        }
+        .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none; color: #831843; font-weight: 600; font-size: 14px;
+            transition: all 0.3s; position: relative; padding: 6px 0; display: flex; align-items: center; gap: 6px;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; right: 0; width: 0; height: 2px;
+            background: linear-gradient(90deg,#ec4899,#be185d); transition: width 0.3s; border-radius: 2px;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: #ec4899; }
+        .cart-icon {
+            position: relative; cursor: pointer; color: #831843; transition: transform 0.3s;
+            user-select: none; -webkit-user-select: none; padding: 8px; display: flex; align-items: center; gap: 6px;
+            font-weight: 600; font-size: 14px;
+        }
+        .cart-icon:hover { transform: scale(1.05); color: #ec4899; }
+        .cart-badge {
+            position: absolute; top: 2px; right: 2px; background: linear-gradient(135deg,#ec4899,#be185d);
+            color: white; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center;
+            justify-content: center; font-size: 10px; font-weight: 700;
+        }
+        .menu-btn {
+            display: none; background: none; border: none; color: #831843; cursor: pointer;
+            padding: 8px; transition: all 0.3s;
+        }
+        .menu-btn:hover { color: #ec4899; }
+
+        /* Professional Mobile Menu */
+        .menu-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 1999;
+            display: none; opacity: 0; transition: opacity 0.3s;
+        }
+        .menu-overlay.active { display: block; opacity: 1; }
+        .mobile-menu {
+            position: fixed; top: 0; right: -320px; width: 320px; height: 100%; background: white;
+            z-index: 2000; transition: right 0.4s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.15); overflow: hidden;
+        }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu-header {
+            background: linear-gradient(135deg,#ec4899,#be185d); padding: 30px 24px; color: white;
+            position: relative; overflow: hidden;
+        }
+        .mobile-menu-header::before {
+            content: ''; position: absolute; top: -30px; right: -30px; width: 120px; height: 120px;
+            background: rgba(255,255,255,0.1); border-radius: 50%;
+        }
+        .mobile-menu-header::after {
+            content: ''; position: absolute; bottom: -20px; left: -20px; width: 80px; height: 80px;
+            background: rgba(255,255,255,0.08); border-radius: 50%;
+        }
+        .mobile-menu-close {
+            position: absolute; top: 16px; left: 16px; background: rgba(255,255,255,0.2); border: none;
+            color: white; width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 10;
+        }
+        .mobile-menu-close:hover { background: rgba(255,255,255,0.3); transform: rotate(90deg); }
+        .mobile-menu-brand { display: flex; align-items: center; gap: 12px; position: relative; z-index: 5; }
+        .mobile-menu-brand-icon {
+            width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .mobile-menu-brand-text { font-size: 22px; font-weight: 900; }
+        .mobile-menu-brand-sub { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+        .mobile-menu-body { flex: 1; overflow-y: auto; padding: 16px 0; -webkit-overflow-scrolling: touch; }
+        .mobile-menu-section { padding: 8px 0; }
+        .mobile-menu-section-title {
+            font-size: 11px; font-weight: 700; color: #9d174d; text-transform: uppercase;
+            letter-spacing: 1px; padding: 8px 24px; opacity: 0.7;
+        }
+        .mobile-menu-item {
+            display: flex; align-items: center; gap: 14px; padding: 14px 24px; text-decoration: none;
+            color: #831843; font-size: 15px; font-weight: 600; transition: all 0.2s;
+            border-right: 3px solid transparent; position: relative;
+        }
+        .mobile-menu-item:hover, .mobile-menu-item:active {
+            background: linear-gradient(90deg,#fdf2f8,#fce7f3); color: #be185d; border-right-color: #ec4899;
+        }
+        .mobile-menu-item-icon {
+            width: 40px; height: 40px; background: linear-gradient(135deg,#fce7f3,#fbcfe8);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            color: #be185d; transition: all 0.2s;
+        }
+        .mobile-menu-item:hover .mobile-menu-item-icon, .mobile-menu-item:active .mobile-menu-item-icon {
+            background: linear-gradient(135deg,#ec4899,#be185d); color: white; transform: scale(1.05);
+        }
+        .mobile-menu-item-badge {
+            margin-right: auto; background: linear-gradient(135deg,#ec4899,#be185d); color: white;
+            font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px;
+        }
+        .mobile-menu-footer {
+            padding: 16px 24px; border-top: 1px solid #fce7f3; background: #fdf2f8;
+        }
+        .mobile-menu-social { display: flex; gap: 12px; justify-content: center; }
+        .mobile-menu-social a {
+            width: 40px; height: 40px; background: white; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; color: #be185d;
+            box-shadow: 0 2px 10px rgba(236,72,153,0.15); transition: all 0.3s;
+        }
+        .mobile-menu-social a:hover {
+            background: linear-gradient(135deg,#ec4899,#be185d); color: white; transform: translateY(-3px);
+        }
+
+        /* Hero */
+        .hero {
+            margin-top: 70px; padding: 40px 20px; display: flex; align-items: center;
+            justify-content: space-between; max-width: 1400px; margin-left: auto; margin-right: auto; gap: 40px;
+        }
+        .hero-content { flex: 1; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg,#fce7f3,#fbcfe8);
+            color: #be185d; padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 700;
+            margin-bottom: 16px; border: 1px solid rgba(236,72,153,0.2);
+        }
+        .hero-title { font-size: 42px; font-weight: 900; color: #831843; line-height: 1.3; margin-bottom: 16px; }
+        .hero-title span { color: #ec4899; }
+        .hero-desc { font-size: 16px; color: #9d174d; line-height: 1.8; margin-bottom: 24px; max-width: 500px; }
+        .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn-primary {
+            background: linear-gradient(135deg,#ec4899,#be185d); color: white; border: none; padding: 14px 30px;
+            border-radius: 50px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(236,72,153,0.3); font-family: 'Cairo', sans-serif;
+            -webkit-appearance: none; appearance: none; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary:hover, .btn-primary:active { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(236,72,153,0.4); }
+        .btn-secondary {
+            background: transparent; color: #be185d; border: 2px solid #ec4899; padding: 14px 30px;
+            border-radius: 50px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s;
+            font-family: 'Cairo', sans-serif; -webkit-appearance: none; appearance: none;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-secondary:hover, .btn-secondary:active { background: linear-gradient(135deg,#ec4899,#be185d); color: white; border-color: transparent; }
+        .hero-image { flex: 1; display: flex; justify-content: center; position: relative; }
+        .hero-img-container {
+            width: 320px; height: 320px; background: linear-gradient(135deg,#fce7f3,#fbcfe8);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            position: relative; box-shadow: 0 30px 60px rgba(236,72,153,0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+        .hero-img-container .emoji { font-size: 140px; }
+        .floating-elements { position: absolute; width: 100%; height: 100%; pointer-events: none; }
+        .float-item { position: absolute; font-size: 32px; animation: float-around 8s ease-in-out infinite; }
+        .float-item:nth-child(1){top:10%;left:0;animation-delay:0s}
+        .float-item:nth-child(2){top:60%;left:-10%;animation-delay:2s}
+        .float-item:nth-child(3){top:20%;right:-5%;animation-delay:4s}
+        .float-item:nth-child(4){bottom:10%;right:5%;animation-delay:6s}
+        @keyframes float-around { 0%,100%{transform:translate(0,0)rotate(0deg)} 25%{transform:translate(10px,-15px)rotate(5deg)} 50%{transform:translate(-5px,10px)rotate(-5deg)} 75%{transform:translate(15px,5px)rotate(3deg)} }
+
+        /* Categories */
+        .categories { padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 28px; font-weight: 900; color: #831843; margin-bottom: 8px; }
+        .section-subtitle { text-align: center; color: #9d174d; font-size: 14px; margin-bottom: 30px; }
+        .category-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+        .category-card {
+            background: white; border-radius: 16px; padding: 24px 16px; text-align: center; cursor: pointer;
+            transition: all 0.4s; box-shadow: 0 8px 25px rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.05);
+            -webkit-tap-highlight-color: rgba(236,72,153,0.1);
+        }
+        .category-card:hover, .category-card:active { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(236,72,153,0.2); }
+        .category-icon-wrap {
+            width: 64px; height: 64px; background: linear-gradient(135deg,#fce7f3,#fbcfe8); border-radius: 16px;
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;
+            color: #be185d; transition: all 0.3s;
+        }
+        .category-card:hover .category-icon-wrap { background: linear-gradient(135deg,#ec4899,#be185d); color: white; transform: scale(1.1); }
+        .category-name { font-size: 16px; font-weight: 700; color: #831843; margin-bottom: 4px; }
+        .category-count { font-size: 13px; color: #9d174d; }
+
+        /* Products */
+        .products { padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
+        .products-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 16px; }
+        .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+        .filter-tab {
+            padding: 8px 20px; border-radius: 50px; border: 1px solid rgba(236,72,153,0.3); background: white;
+            color: #831843; font-family: 'Cairo', sans-serif; font-weight: 600; cursor: pointer;
+            transition: all 0.3s; font-size: 13px; -webkit-appearance: none; appearance: none;
+        }
+        .filter-tab.active, .filter-tab:hover, .filter-tab:active { background: linear-gradient(135deg,#ec4899,#be185d); color: white; border-color: transparent; }
+        .products-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+        .product-card {
+            background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 25px rgba(236,72,153,0.1);
+            transition: all 0.4s; position: relative;
+        }
+        .product-card:hover, .product-card:active { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(236,72,153,0.2); }
+        .product-badge {
+            position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg,#ec4899,#be185d);
+            color: white; padding: 4px 12px; border-radius: 50px; font-size: 11px; font-weight: 700; z-index: 10;
+        }
+        .product-wishlist {
+            position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; background: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s; z-index: 10; color: #9d174d;
+            -webkit-tap-highlight-color: rgba(236,72,153,0.2);
+        }
+        .product-wishlist:hover, .product-wishlist:active, .product-wishlist.active { background: linear-gradient(135deg,#ec4899,#be185d); color: white; }
+        .product-image {
+            height: 180px; background: linear-gradient(135deg,#fdf2f8,#fce7f3); display: flex;
+            align-items: center; justify-content: center; font-size: 60px; position: relative; overflow: hidden;
+        }
+        .product-image::before {
+            content: ''; position: absolute; width: 120px; height: 120px;
+            background: radial-gradient(circle,rgba(236,72,153,0.1) 0%,transparent 70%); border-radius: 50%;
+        }
+        .product-info { padding: 16px; }
+        .product-category { font-size: 11px; color: #ec4899; font-weight: 700; margin-bottom: 4px; }
+        .product-name { font-size: 14px; font-weight: 700; color: #831843; margin-bottom: 6px; line-height: 1.4; }
+        .product-rating { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
+        .stars { color: #fbbf24; font-size: 12px; }
+        .rating-count { font-size: 11px; color: #9d174d; }
+        .product-price-row { display: flex; justify-content: space-between; align-items: center; }
+        .product-price { display: flex; align-items: center; gap: 6px; }
+        .current-price { font-size: 17px; font-weight: 900; color: #be185d; }
+        .old-price { font-size: 12px; color: #9d174d; text-decoration: line-through; }
+        .add-to-cart {
+            width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#ec4899,#be185d);
+            color: white; border: none; cursor: pointer; font-size: 20px; display: flex; align-items: center;
+            justify-content: center; transition: all 0.3s; box-shadow: 0 5px 15px rgba(236,72,153,0.3);
+            -webkit-appearance: none; appearance: none; -webkit-tap-highlight-color: rgba(236,72,153,0.3);
+        }
+        .add-to-cart:hover, .add-to-cart:active { transform: scale(1.1); box-shadow: 0 8px 25px rgba(236,72,153,0.4); }
+
+        /* Features */
+        .features { padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
+        .features-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+        .feature-card {
+            background: white; border-radius: 16px; padding: 28px 20px; text-align: center;
+            box-shadow: 0 8px 25px rgba(236,72,153,0.1); transition: all 0.3s;
+        }
+        .feature-card:hover, .feature-card:active { transform: translateY(-5px); }
+        .feature-icon-wrap {
+            width: 60px; height: 60px; background: linear-gradient(135deg,#fce7f3,#fbcfe8);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px; color: #be185d;
+        }
+        .feature-title { font-size: 16px; font-weight: 700; color: #831843; margin-bottom: 6px; }
+        .feature-desc { font-size: 13px; color: #9d174d; line-height: 1.6; }
+
+        /* Newsletter */
+        .newsletter { padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
+        .newsletter-box {
+            background: linear-gradient(135deg,#ec4899,#be185d); border-radius: 24px; padding: 40px 24px;
+            text-align: center; color: white; position: relative; overflow: hidden;
+        }
+        .newsletter-box::before {
+            content: ''; position: absolute; top: -50%; right: -20%; width: 300px; height: 300px;
+            background: rgba(255,255,255,0.1); border-radius: 50%;
+        }
+        .newsletter-box::after {
+            content: ''; position: absolute; bottom: -30%; left: -10%; width: 200px; height: 200px;
+            background: rgba(255,255,255,0.08); border-radius: 50%;
+        }
+        .newsletter-title { font-size: 24px; font-weight: 900; margin-bottom: 8px; position: relative; z-index: 1; }
+        .newsletter-desc { font-size: 14px; margin-bottom: 24px; opacity: 0.9; position: relative; z-index: 1; }
+        .newsletter-form { display: flex; gap: 12px; max-width: 450px; margin: 0 auto; position: relative; z-index: 1; }
+        .newsletter-input {
+            flex: 1; padding: 14px 20px; border-radius: 50px; border: none;
+            font-family: 'Cairo', sans-serif; font-size: 14px; outline: none;
+            -webkit-appearance: none; appearance: none;
+        }
+        .newsletter-btn {
+            padding: 14px 28px; border-radius: 50px; border: 2px solid white; background: transparent;
+            color: white; font-family: 'Cairo', sans-serif; font-weight: 700; cursor: pointer;
+            transition: all 0.3s; font-size: 14px; -webkit-appearance: none; appearance: none;
+            white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .newsletter-btn:hover, .newsletter-btn:active { background: white; color: #be185d; }
+
+        /* Footer */
+        .footer { background: linear-gradient(135deg,#831843,#500724); color: white; padding: 40px 20px 24px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 30px; max-width: 1400px; margin: 0 auto 30px; }
+        .footer-brand .logo { margin-bottom: 12px; color: white; }
+        .footer-brand p { color: rgba(255,255,255,0.7); line-height: 1.8; font-size: 13px; }
+        .footer-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a {
+            color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;
+            transition: color 0.3s; display: flex; align-items: center; gap: 8px;
+        }
+        .footer-links a:hover { color: #fbcfe8; }
+        .footer-bottom { text-align: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 13px; max-width: 1400px; margin: 0 auto; }
+
+        /* Cart Sidebar */
+        .cart-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);
+            z-index: 2000; display: none; opacity: 0; transition: opacity 0.3s;
+        }
+        .cart-overlay.active { display: block; opacity: 1; }
+        .cart-sidebar {
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100%;
+            background: white; z-index: 2001; transition: right 0.4s cubic-bezier(0.4,0,0.2,1);
+            display: flex; flex-direction: column; box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+        }
+        .cart-sidebar.active { right: 0; }
+        .cart-header { padding: 20px; border-bottom: 1px solid #fce7f3; display: flex; justify-content: space-between; align-items: center; }
+        .cart-header h3 { font-size: 20px; color: #831843; display: flex; align-items: center; gap: 10px; }
+        .cart-close { background: none; border: none; color: #831843; cursor: pointer; transition: all 0.3s; padding: 8px; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: rgba(236,72,153,0.2); }
+        .cart-close:hover, .cart-close:active { transform: rotate(90deg); color: #ec4899; }
+        .cart-items { flex: 1; overflow-y: auto; padding: 16px; -webkit-overflow-scrolling: touch; }
+        .cart-item { display: flex; gap: 12px; padding: 12px; background: #fdf2f8; border-radius: 12px; margin-bottom: 12px; align-items: center; }
+        .cart-item-img { width: 60px; height: 60px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
+        .cart-item-info { flex: 1; min-width: 0; }
+        .cart-item-name { font-weight: 700; color: #831843; font-size: 13px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .cart-item-price { color: #ec4899; font-weight: 700; font-size: 14px; }
+        .cart-item-qty { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+        .qty-btn { width: 28px; height: 28px; border-radius: 50%; border: 1px solid #ec4899; background: white; color: #ec4899; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; -webkit-appearance: none; appearance: none; -webkit-tap-highlight-color: rgba(236,72,153,0.2); font-family: 'Cairo', sans-serif; font-weight: 700; }
+        .cart-item-remove { background: none; border: none; color: #9d174d; cursor: pointer; transition: color 0.3s; padding: 8px; -webkit-tap-highlight-color: rgba(236,72,153,0.2); display: flex; align-items: center; justify-content: center; }
+        .cart-item-remove:hover, .cart-item-remove:active { color: #be185d; }
+        .cart-empty { text-align: center; padding: 50px 20px; color: #9d174d; }
+        .cart-empty-icon { width: 80px; height: 80px; background: linear-gradient(135deg,#fce7f3,#fbcfe8); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #be185d; }
+        .cart-footer { padding: 20px; border-top: 1px solid #fce7f3; background: #fdf2f8; }
+        .cart-total { display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 16px; }
+        .cart-total span:first-child { color: #831843; font-weight: 700; }
+        .cart-total span:last-child { color: #be185d; font-weight: 900; font-size: 20px; }
+        .checkout-btn { width: 100%; padding: 16px; border-radius: 50px; border: none; background: linear-gradient(135deg,#ec4899,#be185d); color: white; font-family: 'Cairo', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; -webkit-appearance: none; appearance: none; -webkit-tap-highlight-color: rgba(236,72,153,0.3); display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .checkout-btn:hover, .checkout-btn:active { box-shadow: 0 10px 30px rgba(236,72,153,0.4); }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg,#ec4899,#be185d); color: white; padding: 14px 28px;
+            border-radius: 50px; font-weight: 700; z-index: 3000; opacity: 0; transition: all 0.4s;
+            box-shadow: 0 10px 30px rgba(236,72,153,0.3); white-space: nowrap; font-size: 14px;
+            pointer-events: none; display: flex; align-items: center; gap: 8px;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        /* Mobile Bottom Navigation */
+        .mobile-nav {
+            display: none; position: fixed; bottom: 0; left: 0; right: 0; background: white;
+            padding: 8px 0 12px; box-shadow: 0 -4px 20px rgba(236,72,153,0.15); z-index: 999;
+            border-top: 1px solid rgba(236,72,153,0.1);
+        }
+        .mobile-nav-items { display: flex; justify-content: space-around; align-items: center; }
+        .mobile-nav-item {
+            display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none;
+            color: #9d174d; font-size: 10px; font-weight: 600; transition: color 0.3s; padding: 4px 8px; position: relative;
+        }
+        .mobile-nav-item .nav-icon-wrap { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 10px; transition: all 0.3s; }
+        .mobile-nav-item.active { color: #ec4899; }
+        .mobile-nav-item.active .nav-icon-wrap { background: linear-gradient(135deg,#fce7f3,#fbcfe8); }
+
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .products-grid, .category-grid, .features-grid { grid-template-columns: repeat(3,1fr); }
+            .hero-title { font-size: 36px; }
+            .hero-img-container { width: 280px; height: 280px; }
+            .hero-img-container .emoji { font-size: 120px; }
+            .nav-links { gap: 18px; }
+        }
+        /* Mobile Landscape */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-btn { display: flex; align-items: center; justify-content: center; }
+            .hero { flex-direction: column; text-align: center; gap: 30px; }
+            .hero-content { order: 2; }
+            .hero-image { order: 1; }
+            .hero-buttons { justify-content: center; }
+            .hero-desc { margin: 0 auto 24px; }
+            .hero-title { font-size: 32px; }
+            .hero-img-container { width: 240px; height: 240px; }
+            .hero-img-container .emoji { font-size: 100px; }
+            .products-grid, .category-grid, .features-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
+            .footer-grid { grid-template-columns: repeat(2,1fr); gap: 24px; }
+            .products-header { flex-direction: column; align-items: flex-start; }
+            .section-title { font-size: 24px; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-btn { width: 100%; justify-content: center; }
+        }
+        /* Mobile Portrait */
+        @media (max-width: 480px) {
+            .navbar { padding: 10px 16px; }
+            .logo { font-size: 18px; }
+            .logo-icon-wrap { width: 32px; height: 32px; }
+            .hero { padding: 24px 16px; margin-top: 60px; }
+            .hero-title { font-size: 26px; }
+            .hero-desc { font-size: 14px; }
+            .btn-primary, .btn-secondary { padding: 12px 24px; font-size: 14px; width: 100%; justify-content: center; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .hero-img-container { width: 200px; height: 200px; }
+            .hero-img-container .emoji { font-size: 80px; }
+            .float-item { font-size: 24px; }
+            .categories, .products, .features, .newsletter { padding: 24px 16px; }
+            .products-grid, .category-grid, .features-grid { grid-template-columns: 1fr; gap: 12px; }
+            .category-card { padding: 20px 16px; display: flex; align-items: center; text-align: right; gap: 16px; }
+            .category-icon-wrap { margin: 0; width: 56px; height: 56px; }
+            .category-name { font-size: 18px; }
+            .product-image { height: 200px; font-size: 80px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+            .cart-sidebar { max-width: none; }
+            .mobile-nav { display: block; }
+            body { padding-bottom: 70px; }
+            .filter-tabs { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+            .filter-tab { white-space: nowrap; flex-shrink: 0; }
+            .newsletter-box { padding: 30px 20px; }
+            .newsletter-title { font-size: 20px; }
+            .mobile-menu { width: 280px; right: -280px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <!-- SVG Icons Definitions -->
+    <svg style="display:none;">
+        <defs>
+            <symbol id="icon-home" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></symbol>
+            <symbol id="icon-products" viewBox="0 0 24 24"><path d="M12 2l-5.5 9h11z"/><circle cx="17.5" cy="17.5" r="4.5"/><path d="M3 13.5h8v8H3z"/></symbol>
+            <symbol id="icon-categories" viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></symbol>
+            <symbol id="icon-star" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></symbol>
+            <symbol id="icon-cart" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></symbol>
+            <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></symbol>
+            <symbol id="icon-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
+            <symbol id="icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></symbol>
+            <symbol id="icon-heart-o" viewBox="0 0 24 24"><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></symbol>
+            <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
+            <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></symbol>
+            <symbol id="icon-minus" viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z"/></symbol>
+            <symbol id="icon-search" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></symbol>
+            <symbol id="icon-user" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></symbol>
+            <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></symbol>
+            <symbol id="icon-email" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></symbol>
+            <symbol id="icon-location" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></symbol>
+            <symbol id="icon-truck" viewBox="0 0 24 24"><path d="M18 18.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM19.5 9.5L21.46 12H17V9.5h2.5zM6 18.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></symbol>
+            <symbol id="icon-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></symbol>
+            <symbol id="icon-refresh" viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></symbol>
+            <symbol id="icon-chat" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></symbol>
+            <symbol id="icon-makeup" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></symbol>
+            <symbol id="icon-spa" viewBox="0 0 24 24"><path d="M12 22c4.97 0 9-4.03 9-9-4.5 0-9 4.5-9 9zm0-20C7.03 2 3 6.03 3 11c4.5 0 9-4.5 9-9zm0 0c0 4.5-4.5 9-9 9 0-4.97 4.03-9 9-9z"/></symbol>
+            <symbol id="icon-fragrance" viewBox="0 0 24 24"><path d="M12 2C9 2 7 4 7 7c0 2 1 3 2 4v1H8c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2h-1v-1c1-1 2-2 2-4 0-3-2-5-5-5z"/></symbol>
+            <symbol id="icon-hair" viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 2 1 4 2.5 5.5V20c0 1.1.9 2 2 2h5c1.1 0 2-.9 2-2v-5.5C16 13 17 11 17 9c0-4-3-7-7-7z"/></symbol>
+            <symbol id="icon-eye" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></symbol>
+            <symbol id="icon-palette" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></symbol>
+            <symbol id="icon-rose" viewBox="0 0 24 24"><path d="M12 2C9 2 7 4 7 7c0 2 1 3 2 4v1H8c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2h-1v-1c1-1 2-2 2-4 0-3-2-5-5-5z"/></symbol>
+            <symbol id="icon-sparkle" viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></symbol>
+            <symbol id="icon-gift" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></symbol>
+            <symbol id="icon-facebook" viewBox="0 0 24 24"><path d="M17 2v4h-2c-.69 0-1 .81-1 1.5V10h3v4h-3v8h-4v-8H7v-4h3V6a4 4 0 014-4h3z"/></symbol>
+            <symbol id="icon-instagram" viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2m-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 011.25 1.25A1.25 1.25 0 0117.25 8 1.25 1.25 0 0116 6.75a1.25 1.25 0 011.25-1.25M12 7a5 5 0 015 5 5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5m0 2a3 3 0 00-3 3 3 3 0 003 3 3 3 0 003-3 3 3 0 00-3-3z"/></symbol>
+            <symbol id="icon-twitter" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 01-1.93.07 4.28 4.28 0 004 2.98 8.521 8.521 0 01-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></symbol>
+            <symbol id="icon-whatsapp" viewBox="0 0 24 24"><path d="M16.75 13.96c.25.13.41.2.46.3.05.11.04.61-.21 1.18-.45.99-1.51 1.84-2.52 2.12-.53.15-1.15.13-1.52-.11-.38-.24-.63-.74-.91-1.31-.13-.27-.29-.59-.48-.93-.02-.04-.06-.04-.1-.04-.03 0-.06.01-.1.04l-.01.01c-.27.17-.59.38-.91.59-.33.21-.66.43-.93.59-.03.02-.07.03-.11.03-.04 0-.08-.01-.11-.03-.38-.24-.74-.52-1.08-.82-.34-.3-.66-.63-.95-.99-.29-.36-.55-.75-.77-1.16-.22-.41-.4-.84-.54-1.28-.14-.44-.24-.89-.3-1.34-.06-.45-.08-.9-.06-1.34.02-.44.09-.87.21-1.28.12-.41.29-.8.51-1.16.22-.36.49-.69.81-.98.32-.29.69-.53 1.1-.72.41-.19.86-.32 1.32-.39.46-.07.93-.07 1.39 0 .46.07.9.21 1.32.39.42.19.79.43 1.1.72.32.29.59.62.81.98.22.36.39.75.51 1.16.12.41.19.84.21 1.28.02.44 0 .89-.06 1.34-.06.45-.16.9-.3 1.34-.14.44-.32.87-.54 1.28-.22.41-.48.8-.77 1.16-.29.36-.61.69-.95.99-.34.3-.7.58-1.08.82-.03.02-.07.03-.11.03-.04 0-.08-.01-.11-.03-.27-.16-.6-.38-.93-.59-.32-.21-.64-.42-.91-.59l-.01-.01c-.04-.03-.07-.04-.1-.04-.04 0-.08 0-.1.04-.19.34-.35.66-.48.93-.28.57-.53 1.07-.91 1.31-.37.24-.99.26-1.52.11-1.01-.28-2.07-1.13-2.52-2.12-.25-.57-.26-1.07-.21-1.18.05-.1.21-.17.46-.3.25-.13 1.14-.56 1.31-.63.17-.07.31-.11.44-.07.13.04.25.17.36.31.11.14.52.63.59.71.07.08.13.14.19.14.06 0 .12-.06.19-.14.07-.08.48-.57.59-.71.11-.14.23-.27.36-.31.13-.04.27 0 .44.07.17.07 1.06.5 1.31.63z"/></symbol>
+            <symbol id="icon-send" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></symbol>
+            <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></symbol>
+            <symbol id="icon-arrow-left" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></symbol>
+        </defs>
+    </svg>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <button class="menu-btn" onclick="toggleMobileMenu()" aria-label="فتح القائمة">
+            <svg class="icon-svg"><use href="#icon-menu"/></svg>
+        </button>
+        <div class="logo">
+            <div class="logo-icon-wrap">
+                <svg class="icon-svg" style="color:white;"><use href="#icon-sparkle"/></svg>
+            </div>
+            جمالك
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home"><svg class="icon-svg icon-svg-sm"><use href="#icon-home"/></svg> الرئيسية</a></li>
+            <li><a href="#products"><svg class="icon-svg icon-svg-sm"><use href="#icon-products"/></svg> المنتجات</a></li>
+            <li><a href="#categories"><svg class="icon-svg icon-svg-sm"><use href="#icon-categories"/></svg> الأقسام</a></li>
+            <li><a href="#features"><svg class="icon-svg icon-svg-sm"><use href="#icon-star"/></svg> مميزاتنا</a></li>
+            <li><a href="#contact"><svg class="icon-svg icon-svg-sm"><use href="#icon-chat"/></svg> تواصل معنا</a></li>
+        </ul>
+        <div class="cart-icon" onclick="toggleCart()">
+            <svg class="icon-svg"><use href="#icon-cart"/></svg>
+            <span style="font-size:14px;">السلة</span>
+            <span class="cart-badge" id="cartBadge">0</span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMobileMenu()"></div>
+
+    <!-- Professional Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="إغلاق القائمة">
+                <svg class="icon-svg" style="color:white;"><use href="#icon-close"/></svg>
+            </button>
+            <div class="mobile-menu-brand">
+                <div class="mobile-menu-brand-icon">
+                    <svg class="icon-svg-lg" style="color:white;"><use href="#icon-sparkle"/></svg>
+                </div>
+                <div>
+                    <div class="mobile-menu-brand-text">جمالك</div>
+                    <div class="mobile-menu-brand-sub">متجر التجميل الفاخر</div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-menu-body">
+            <div class="mobile-menu-section">
+                <div class="mobile-menu-section-title">التنقل</div>
+                <a href="#home" class="mobile-menu-item" onclick="toggleMobileMenu()">
+                    <div class="mobile-menu-item-icon"><svg class="icon-svg"><use href="#icon-home"/></svg></div>
+                    الرئيسية
+                </a>
+                <a href="#products" class="mobile-menu-item" onclick="toggleMobileMenu()">
+                    <div class="mobile-menu-item-icon"><svg class="icon-svg"><use href="#icon-products"/></svg></div>
+                    المنتجات
+                    <span class="mobile-menu-item-badge">138</span>
+                </a>
+                <a href="#categories" class="mobile-menu-item" onclick="toggleMobileMenu()">
+                    <div class="mobile-menu-item-icon"><svg class="icon-svg"><use href="#icon-categories"/></svg></div>
+                    الأقسام
+                </a>
+                <a href="#features" class="mobile-menu-item" onclick="toggleMobileMenu()">
+                    <div class="mobile-menu-item-icon"><svg class="icon-svg"><use href="#icon-star"/></svg></div>
+                    مميزاتنا
+                </a>
+                <a href="#contact" class="mobile-menu-item" onclick="toggleMobileMenu()">
+                    <div class="mobile-menu-item-icon"><svg class="icon-svg"><use href="#icon-chat"/></svg></div>
+                    تواصل معنا
+                </a>
+            </div>
+            <div class="mobile-menu-section">
+                <div class="mobile-menu-section-title">حسابي</div>
+                <a href="#" class="mobile-menu-item" onclick="toggleMobileMenu()">
+                    <div class="mobile-menu-item-icon"><svg class="icon-svg"><use href="#icon-user"/></svg></div>
+                    تسجيل الدخول
+                </a>
+                <a href="#" class="mobile-menu-item" onclick="toggleMobileMenu()">
+                    <div class="mobile-menu-item-icon"><svg class="icon-svg"><use href="#icon-heart"/></svg></div>
+                    المفضلة
+                </a>
+                <a href="#" class="mobile-menu-item" onclick="toggleMobileMenu()">
+                    <div class="mobile-menu-item-icon"><svg class="icon-svg"><use href="#icon-cart"/></svg></div>
+                    طلباتي
+                </a>
+            </div>
+        </div>
+        <div class="mobile-menu-footer">
+            <div class="mobile-menu-social">
+                <a href="#" aria-label="Facebook"><svg class="icon-svg-sm"><use href="#icon-facebook"/></svg></a>
+                <a href="#" aria-label="Instagram"><svg class="icon-svg-sm"><use href="#icon-instagram"/></svg></a>
+                <a href="#" aria-label="Twitter"><svg class="icon-svg-sm"><use href="#icon-twitter"/></svg></a>
+                <a href="#" aria-label="WhatsApp"><svg class="icon-svg-sm"><use href="#icon-whatsapp"/></svg></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <svg class="icon-svg icon-svg-sm"><use href="#icon-star"/></svg>
+                عروض حصرية - خصم يصل إلى 50%
+            </div>
+            <h1 class="hero-title">اكتشفي <span>جمالك</span><br>الحقيقي معنا</h1>
+            <p class="hero-desc">مجموعة فاخرة من أفضل منتجات التجميل العالمية، مختارة بعناية لتمنحك إطلالة ساحرة وثقة لا تُضاهى</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="scrollToProducts()">
+                    <svg class="icon-svg icon-svg-sm"><use href="#icon-arrow-left"/></svg>
+                    تسوقي الآن
+                </button>
+                <button class="btn-secondary">اكتشفي المزيد</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-img-container">
+                <span class="emoji" style="font-size:140px;">&#128132;</span>
+            </div>
+            <div class="floating-elements">
+                <span class="float-item">&#128133;</span>
+                <span class="float-item">&#129524;</span>
+                <span class="float-item">&#127800;</span>
+                <span class="float-item">&#10024;</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories" id="categories">
+        <h2 class="section-title">تصفحي حسب القسم</h2>
+        <p class="section-subtitle">اختيارات متنوعة تلبي جميع احتياجاتك</p>
+        <div class="category-grid">
+            <div class="category-card" onclick="filterProducts('makeup')">
+                <div class="category-icon-wrap"><svg class="icon-svg-xl"><use href="#icon-makeup"/></svg></div>
+                <div class="category-name">مكياج</div>
+                <div class="category-count">45 منتج</div>
+            </div>
+            <div class="category-card" onclick="filterProducts('skincare')">
+                <div class="category-icon-wrap"><svg class="icon-svg-xl"><use href="#icon-spa"/></svg></div>
+                <div class="category-name">عناية بالبشرة</div>
+                <div class="category-count">38 منتج</div>
+            </div>
+            <div class="category-card" onclick="filterProducts('perfume')">
+                <div class="category-icon-wrap"><svg class="icon-svg-xl"><use href="#icon-fragrance"/></svg></div>
+                <div class="category-name">عطور</div>
+                <div class="category-count">25 منتج</div>
+            </div>
+            <div class="category-card" onclick="filterProducts('hair')">
+                <div class="category-icon-wrap"><svg class="icon-svg-xl"><use href="#icon-hair"/></svg></div>
+                <div class="category-name">عناية بالشعر</div>
+                <div class="category-count">30 منتج</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+        <div class="products-header">
+            <div>
+                <h2 class="section-title" style="text-align:right; margin-bottom:5px;">أحدث المنتجات</h2>
+                <p class="section-subtitle" style="text-align:right;">منتجات مختارة بعناية لجمالك</p>
+            </div>
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterProducts('all')">الكل</button>
+                <button class="filter-tab" onclick="filterProducts('makeup')">مكياج</button>
+                <button class="filter-tab" onclick="filterProducts('skincare')">بشرة</button>
+                <button class="filter-tab" onclick="filterProducts('perfume')">عطور</button>
+            </div>
+        </div>
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <h2 class="section-title">لماذا تختارينا؟</h2>
+        <p class="section-subtitle">نضمن لك تجربة تسوق ممتعة وآمنة</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon-wrap"><svg class="icon-svg-lg"><use href="#icon-truck"/></svg></div>
+                <div class="feature-title">توصيل سريع</div>
+                <div class="feature-desc">توصيل خلال 24-48 ساعة لجميع المدن</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrap"><svg class="icon-svg-lg"><use href="#icon-check"/></svg></div>
+                <div class="feature-title">منتجات أصلية</div>
+                <div class="feature-desc">100% أصلية مع ضمان الجودة</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrap"><svg class="icon-svg-lg"><use href="#icon-refresh"/></svg></div>
+                <div class="feature-title">إرجاع سهل</div>
+                <div class="feature-desc">سياسة إرجاع مرنة خلال 14 يوم</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrap"><svg class="icon-svg-lg"><use href="#icon-chat"/></svg></div>
+                <div class="feature-title">دعم 24/7</div>
+                <div class="feature-desc">فريق دعم متاح على مدار الساعة</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="contact">
+        <div class="newsletter-box">
+            <h2 class="newsletter-title">اشتركي في نشرتنا الإخبارية</h2>
+            <p class="newsletter-desc">احصلي على أحدث العروض والمنتجات الجديدة مباشرة إلى بريدك</p>
+            <div class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="أدخل بريدك الإلكتروني...">
+                <button class="newsletter-btn">
+                    <svg class="icon-svg icon-svg-sm"><use href="#icon-send"/></svg>
+                    اشتركي الآن
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo" style="color:white;">
+                    <div class="logo-icon-wrap">
+                        <svg class="icon-svg" style="color:white;"><use href="#icon-sparkle"/></svg>
+                    </div>
+                    جمالك
+                </div>
+                <p>وجهتك الأولى لأفضل منتجات التجميل الفاخرة. نؤمن بأن الجمال يبدأ من الداخل ويظهر على الخارج.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">روابط سريعة</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><svg class="icon-svg icon-svg-sm"><use href="#icon-arrow-left"/></svg> الرئيسية</a></li>
+                    <li><a href="#"><svg class="icon-svg icon-svg-sm"><use href="#icon-arrow-left"/></svg> المنتجات</a></li>
+                    <li><a href="#"><svg class="icon-svg icon-svg-sm"><use href="#icon-arrow-left"/></svg> العروض</a></li>
+                    <li><a href="#"><svg class="icon-svg icon-svg-sm"><use href="#icon-arrow-left"/></svg> من نحن</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">الأقسام</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><svg class="icon-svg icon-svg-sm"><use href="#icon-arrow-left"/></svg> مكياج</a></li>
+                    <li><a href="#"><svg class="icon-svg icon-svg-sm"><use href="#icon-arrow-left"/></svg> عناية بالبشرة</a></li>
+                    <li><a href="#"><svg class="icon-svg icon-svg-sm"><use href="#icon-arrow-left"/></svg> عطور</a></li>
+                    <li><a href="#"><svg class="icon-svg icon-svg-sm"><use href="#icon-arrow-left"/></svg> عناية بالشعر</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">تواصل معنا</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><svg class="icon-svg icon-svg-sm"><use href="#icon-email"/></svg> info@jamalik.com</a></li>
+                    <li><a href="#"><svg class="icon-svg icon-svg-sm"><use href="#icon-phone"/></svg> +966 50 123 4567</a></li>
+                    <li><a href="#"><svg class="icon-svg icon-svg-sm"><use href="#icon-location"/></svg> الرياض، السعودية</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">جميع الحقوق محفوظة &copy; 2026 جمالك - متجر التجميل</div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="#home" class="mobile-nav-item active">
+                <div class="nav-icon-wrap"><svg class="icon-svg"><use href="#icon-home"/></svg></div>
+                الرئيسية
+            </a>
+            <a href="#categories" class="mobile-nav-item">
+                <div class="nav-icon-wrap"><svg class="icon-svg"><use href="#icon-categories"/></svg></div>
+                الأقسام
+            </a>
+            <a href="#products" class="mobile-nav-item">
+                <div class="nav-icon-wrap"><svg class="icon-svg"><use href="#icon-products"/></svg></div>
+                المنتجات
+            </a>
+            <a href="#features" class="mobile-nav-item">
+                <div class="nav-icon-wrap"><svg class="icon-svg"><use href="#icon-star"/></svg></div>
+                المميزات
+            </a>
+            <a href="javascript:void(0)" class="mobile-nav-item" onclick="toggleCart()">
+                <div class="nav-icon-wrap"><svg class="icon-svg"><use href="#icon-cart"/></svg></div>
+                السلة
+            </a>
+        </div>
+    </nav>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><svg class="icon-svg"><use href="#icon-cart"/></svg> سلة التسوق</h3>
+            <button class="cart-close" onclick="toggleCart()" aria-label="إغلاق السلة">
+                <svg class="icon-svg"><use href="#icon-close"/></svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <div class="cart-empty-icon"><svg class="icon-svg-xl"><use href="#icon-gift"/></svg></div>
+                <p>سلة التسوق فارغة</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display:none;">
+            <div class="cart-total"><span>الإجمالي:</span><span id="cartTotal">0 ر.س</span></div>
+            <button class="checkout-btn"><svg class="icon-svg icon-svg-sm"><use href="#icon-arrow-left"/></svg> إتمام الشراء</button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"><svg class="icon-svg icon-svg-sm"><use href="#icon-check"/></svg> تمت الإضافة إلى السلة بنجاح!</div>
+
+    <script>
+        var products = [
+            { id: 1, name: "أحمر شفاه ماتي فاخر", category: "makeup", price: 89, oldPrice: 120, rating: 4.8, reviews: 234, badge: "الأكثر مبيعاً", emoji: "&#128132;" },
+            { id: 2, name: "سيروم فيتامين سي للبشرة", category: "skincare", price: 149, oldPrice: 199, rating: 4.9, reviews: 512, badge: "جديد", emoji: "&#129524;" },
+            { id: 3, name: "عطر روز جولد الفاخر", category: "perfume", price: 299, oldPrice: 450, rating: 4.7, reviews: 189, badge: "خصم", emoji: "&#127800;" },
+            { id: 4, name: "ماسكارا حجم وتكثيف", category: "makeup", price: 75, oldPrice: 95, rating: 4.6, reviews: 378, badge: "", emoji: "&#128065;" },
+            { id: 5, name: "كريم مرطب بزيت الأرغان", category: "skincare", price: 119, oldPrice: 159, rating: 4.8, reviews: 267, badge: "الأكثر مبيعاً", emoji: "&#128134;" },
+            { id: 6, name: "شامبو إصلاح الشعر", category: "hair", price: 65, oldPrice: 85, rating: 4.5, reviews: 145, badge: "", emoji: "&#129524;" },
+            { id: 7, name: "باليت ظلال عيون نيود", category: "makeup", price: 179, oldPrice: 250, rating: 4.9, reviews: 423, badge: "محدود", emoji: "&#127912;" },
+            { id: 8, name: "تونر الورد الطبيعي", category: "skincare", price: 95, oldPrice: 130, rating: 4.7, reviews: 198, badge: "جديد", emoji: "&#127801;" },
+        ];
+
+        var cart = [];
+        var wishlist = [];
+
+        function renderProducts(filter) {
+            filter = filter || 'all';
+            var grid = document.getElementById('productsGrid');
+            if (!grid) return;
+            var filtered = [];
+            if (filter === 'all') { filtered = products; }
+            else { for (var i = 0; i < products.length; i++) { if (products[i].category === filter) filtered.push(products[i]); } }
+
+            var html = '';
+            for (var i = 0; i < filtered.length; i++) {
+                var p = filtered[i];
+                var isWished = false;
+                for (var w = 0; w < wishlist.length; w++) { if (wishlist[w] === p.id) { isWished = true; break; } }
+                var badgeHtml = p.badge ? '<span class="product-badge">' + p.badge + '</span>' : '';
+                var oldPriceHtml = p.oldPrice ? '<span class="old-price">' + p.oldPrice + ' ر.س</span>' : '';
+                var stars = '';
+                for (var s = 0; s < Math.floor(p.rating); s++) stars += '&#11088;';
+
+                html += '<div class="product-card" data-category="' + p.category + '">' +
+                    badgeHtml +
+                    '<div class="product-wishlist ' + (isWished ? 'active' : '') + '" ontouchstart="" onclick="event.stopPropagation(); toggleWishlist(' + p.id + ', this)">' +
+                    '<svg class="icon-svg icon-svg-sm"><use href="#' + (isWished ? 'icon-heart' : 'icon-heart-o') + '"/></svg>' +
+                    '</div>' +
+                    '<div class="product-image"><span>' + p.emoji + '</span></div>' +
+                    '<div class="product-info">' +
+                    '<div class="product-category">' + getCategoryName(p.category) + '</div>' +
+                    '<div class="product-name">' + p.name + '</div>' +
+                    '<div class="product-rating"><span class="stars">' + stars + '</span><span class="rating-count">(' + p.reviews + ')</span></div>' +
+                    '<div class="product-price-row">' +
+                    '<div class="product-price"><span class="current-price">' + p.price + ' ر.س</span>' + oldPriceHtml + '</div>' +
+                    '<button class="add-to-cart" ontouchstart="" onclick="event.stopPropagation(); addToCart(' + p.id + ')"><svg class="icon-svg icon-svg-sm"><use href="#icon-plus"/></svg></button>' +
+                    '</div></div></div>';
+            }
+            grid.innerHTML = html;
+        }
+
+        function getCategoryName(cat) {
+            var names = { makeup: 'مكياج', skincare: 'عناية بالبشرة', perfume: 'عطور', hair: 'عناية بالشعر' };
+            return names[cat] || cat;
+        }
+
+        function filterProducts(category) {
+            var tabs = document.querySelectorAll('.filter-tab');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+                var tabText = tabs[i].textContent.trim();
+                if ((category === 'all' && tabText === 'الكل') || (category === 'makeup' && tabText === 'مكياج') ||
+                    (category === 'skincare' && tabText === 'بشرة') || (category === 'perfume' && tabText === 'عطور')) {
+                    tabs[i].classList.add('active');
+                }
+            }
+            var grid = document.getElementById('productsGrid');
+            grid.style.opacity = '0'; grid.style.transform = 'translateY(20px)'; grid.style.transition = 'all 0.3s';
+            setTimeout(function() { renderProducts(category); grid.style.opacity = '1'; grid.style.transform = 'translateY(0)'; }, 300);
+        }
+
+        function addToCart(productId) {
+            var product = null;
+            for (var i = 0; i < products.length; i++) { if (products[i].id === productId) { product = products[i]; break; } }
+            if (!product) return;
+            var existing = null;
+            for (var j = 0; j < cart.length; j++) { if (cart[j].id === productId) { existing = cart[j]; break; } }
+            if (existing) { existing.qty++; } else { cart.push({ id: product.id, name: product.name, price: product.price, emoji: product.emoji, qty: 1 }); }
+            updateCart();
+            showToast('<svg class="icon-svg icon-svg-sm"><use href="#icon-check"/></svg> تمت الإضافة إلى السلة!');
+        }
+
+        function updateCart() {
+            var badge = document.getElementById('cartBadge');
+            var totalItems = 0;
+            for (var i = 0; i < cart.length; i++) totalItems += cart[i].qty;
+            badge.textContent = totalItems;
+            var cartItems = document.getElementById('cartItems');
+            var cartFooter = document.getElementById('cartFooter');
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon"><svg class="icon-svg-xl"><use href="#icon-gift"/></svg></div><p>سلة التسوق فارغة</p></div>';
+                cartFooter.style.display = 'none';
+            } else {
+                var html = ''; var total = 0;
+                for (var i = 0; i < cart.length; i++) {
+                    var item = cart[i]; total += item.price * item.qty;
+                    html += '<div class="cart-item"><div class="cart-item-img">' + item.emoji + '</div>' +
+                        '<div class="cart-item-info"><div class="cart-item-name">' + item.name + '</div><div class="cart-item-price">' + item.price + ' ر.س</div></div>' +
+                        '<div class="cart-item-qty"><button class="qty-btn" ontouchstart="" onclick="updateQty(' + item.id + ', -1)"><svg class="icon-svg icon-svg-sm"><use href="#icon-minus"/></svg></button>' +
+                        '<span>' + item.qty + '</span><button class="qty-btn" ontouchstart="" onclick="updateQty(' + item.id + ', 1)"><svg class="icon-svg icon-svg-sm"><use href="#icon-plus"/></svg></button></div>' +
+                        '<button class="cart-item-remove" ontouchstart="" onclick="removeFromCart(' + item.id + ')"><svg class="icon-svg icon-svg-sm"><use href="#icon-trash"/></svg></button></div>';
+                }
+                cartItems.innerHTML = html; cartFooter.style.display = 'block';
+                document.getElementById('cartTotal').textContent = total + ' ر.س';
+            }
+        }
+
+        function updateQty(productId, change) {
+            var item = null;
+            for (var i = 0; i < cart.length; i++) { if (cart[i].id === productId) { item = cart[i]; break; } }
+            if (item) { item.qty += change; if (item.qty <= 0) removeFromCart(productId); else updateCart(); }
+        }
+
+        function removeFromCart(productId) {
+            var newCart = [];
+            for (var i = 0; i < cart.length; i++) { if (cart[i].id !== productId) newCart.push(cart[i]); }
+            cart = newCart; updateCart();
+            showToast('<svg class="icon-svg icon-svg-sm"><use href="#icon-trash"/></svg> تمت إزالة المنتج من السلة');
+        }
+
+        function toggleCart() {
+            document.getElementById('cartOverlay').classList.toggle('active');
+            document.getElementById('cartSidebar').classList.toggle('active');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('menuOverlay').classList.toggle('active');
+            var menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        function toggleWishlist(productId, el) {
+            var index = -1;
+            for (var i = 0; i < wishlist.length; i++) { if (wishlist[i] === productId) { index = i; break; } }
+            if (index > -1) {
+                wishlist.splice(index, 1);
+                el.innerHTML = '<svg class="icon-svg icon-svg-sm"><use href="#icon-heart-o"/></svg>';
+                el.classList.remove('active');
+                showToast('<svg class="icon-svg icon-svg-sm"><use href="#icon-heart-o"/></svg> تمت الإزالة من المفضلة');
+            } else {
+                wishlist.push(productId);
+                el.innerHTML = '<svg class="icon-svg icon-svg-sm"><use href="#icon-heart"/></svg>';
+                el.classList.add('active');
+                showToast('<svg class="icon-svg icon-svg-sm"><use href="#icon-heart"/></svg> تمت الإضافة إلى المفضلة');
+            }
+        }
+
+        function showToast(message) {
+            var toast = document.getElementById('toast');
+            toast.innerHTML = message;
+            toast.classList.add('show');
+            setTimeout(function() { toast.classList.remove('show'); }, 3000);
+        }
+
+        function scrollToProducts() {
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', function() {
+            var navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) navbar.style.boxShadow = '0 4px 30px rgba(236,72,153,0.25)';
+            else navbar.style.boxShadow = '0 4px 30px rgba(236,72,153,0.15)';
+        });
+
+        var mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+        for (var i = 0; i < mobileNavItems.length; i++) {
+            mobileNavItems[i].addEventListener('click', function() {
+                for (var j = 0; j < mobileNavItems.length; j++) mobileNavItems[j].classList.remove('active');
+                this.classList.add('active');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() { renderProducts('all'); });
+    <\/script>
+
 </body>
 </html>`;
 }
